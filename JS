@@ -1,0 +1,22 @@
+let tasks = [];
+
+function addTask() {
+  const text = task.value;
+  if (!text) return;
+  tasks.push({ text, done: false });
+  task.value = "";
+  render();
+}
+
+function render() {
+  list.innerHTML = "";
+  tasks.forEach((t, i) => {
+    const li = document.createElement("li");
+    li.textContent = t.text;
+    li.onclick = () => { t.done = !t.done; render(); };
+    if (t.done) li.classList.add("done");
+    list.appendChild(li);
+  });
+  const done = tasks.filter(t => t.done).length;
+  progress.textContent = `Progresso: ${done}/${tasks.length}`;
+}
